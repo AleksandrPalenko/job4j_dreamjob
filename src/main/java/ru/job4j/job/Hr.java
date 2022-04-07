@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Hr {
 
-    String name;
-    int id;
+    private String name;
+    private int id;
 
     public Hr(String name, int id) {
         this.name = name;
