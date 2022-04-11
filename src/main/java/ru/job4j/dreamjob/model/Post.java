@@ -1,4 +1,4 @@
-package ru.job4j.dream.model;
+package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +36,18 @@ public class Post {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreated() {
+        return created;
     }
 
     @Override
