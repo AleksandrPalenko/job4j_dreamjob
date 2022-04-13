@@ -12,7 +12,7 @@ public class PostStore {
 
     private static final PostStore INST = new PostStore();
 
-    AtomicInteger id = new AtomicInteger();
+    private final AtomicInteger id = new AtomicInteger();
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
     private PostStore() {
@@ -40,4 +40,5 @@ public class PostStore {
     public Optional<Boolean> findById(int id) {
         return Optional.of(posts.containsKey(id));
     }
+
 }
