@@ -37,8 +37,8 @@ public class PostStore {
         posts.replace(post.getId(), post);
     }
 
-    public Optional<Boolean> findById(int id) {
-        return Optional.of(posts.containsKey(id));
+    public Post findById(int id) {
+        return posts.get(id);
     }
 
 }

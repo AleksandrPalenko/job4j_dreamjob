@@ -40,7 +40,7 @@ public class CandidateStore {
         candidates.replace(candidate.getId(), candidate);
     }
 
-    public Optional<Boolean> findById(int id) {
-        return Optional.of(candidates.containsKey(id));
+    public Candidate findById(int id) {
+        return candidates.get(id);
     }
 }
