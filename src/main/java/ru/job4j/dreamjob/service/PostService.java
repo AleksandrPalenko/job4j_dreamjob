@@ -1,38 +1,32 @@
 package ru.job4j.dreamjob.service;
 
 import ru.job4j.dreamjob.model.Post;
+import ru.job4j.dreamjob.store.PostStore;
 
-import java.util.List;
+import java.util.Collection;
 
 public class PostService {
 
-    private final PostService store = new PostService();
-    private static volatile PostService INSTANCE;
+    private final PostStore store;
 
-    public static PostService getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new PostService();
-        }
-        return INSTANCE;
+    public PostService() {
+        this.store = PostStore.instOf();
     }
 
-    public List<Post> findAll() {
+    public Collection<Post> findAll() {
         return store.findAll();
     }
 
-    public Post add() {
-        return store.add();
+    public void add(Post post) {
+        store.add(post);
     }
 
-    public Post update() {
-        return store.update();
+    public void update(Post post) {
+        store.update(post);
     }
 
-    public Post findById() {
-        return store.findById();
+    public Post findById(int id) {
+        return store.findById(id);
     }
 
-    public Post instOf() {
-        return store.instOf();
-    }
 }
