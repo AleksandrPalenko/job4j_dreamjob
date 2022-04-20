@@ -9,7 +9,7 @@ public class CandidateService {
 
     private final CandidateStore store;
 
-    public CandidateService(CandidateStore store) {
+    public CandidateService() {
         this.store = CandidateStore.instOf();
     }
 
