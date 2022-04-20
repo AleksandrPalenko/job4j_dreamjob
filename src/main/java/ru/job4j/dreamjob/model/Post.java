@@ -8,6 +8,7 @@ public class Post {
     private int id;
     private String name;
     private String description;
+    private boolean visible;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private final String created = LocalDateTime.now().format(formatter);
 
@@ -36,6 +37,14 @@ public class Post {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     public String getDescription() {
