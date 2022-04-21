@@ -11,8 +11,7 @@ public class Post implements Serializable {
     private String description;
     private boolean visible;
     private City city;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-    private final String created = LocalDateTime.now().format(formatter);
+    private LocalDateTime created = LocalDateTime.now();
 
     private Post() {
     }
@@ -22,10 +21,13 @@ public class Post implements Serializable {
         this.name = name;
     }
 
-    public Post(int id, String name, String description) {
+    public Post(int id, String name, String description, LocalDateTime created, boolean visible, City city) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.created = created;
+        this.visible = visible;
+        this.city = city;
     }
 
     public int getId() {
@@ -68,7 +70,7 @@ public class Post implements Serializable {
         this.description = description;
     }
 
-    public String getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 

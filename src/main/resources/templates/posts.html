@@ -42,17 +42,22 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Имя</th>
+                <th scope="col">#Id</th>
+                <th scope="col">Имя вакансии</th>
+                <th scope="col">Описание вакансии</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Город</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="post: ${posts}">
-                <td th:text="${post.id}"></td>
+            <tr th:each="post:${posts}">
                 <td>
+                    <span th:text="${post.id}"></span>
                     <a th:href="@{|/formUpdatePost/${post.id}|}">
                         <i class="fa fa-edit"></i>
                     </a>
+                </td>
+                <td >
                     <span th:text="${post.name}"></span>
                     <span th:if="${post.visible}">
                         <i class="fa fa-check-square-o"></i>
@@ -61,6 +66,9 @@
                         <i class="fa fa-square-o"></i>
                     </span>
                 </td>
+                <td th:text="${post.description}"></td>
+                <td th:text="${post.created}"></td>
+                <td th:text="${post.city.name}"></td>
             </tr>
             </tbody>
         </table>
