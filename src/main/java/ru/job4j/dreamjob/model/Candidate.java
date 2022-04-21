@@ -10,6 +10,10 @@ public class Candidate {
     private LocalDateTime created = LocalDateTime.now();
     private byte[] photo;
 
+    public Candidate() {
+
+    }
+
     public Candidate(int id, String name) {
         this.id = id;
         this.name = name;
