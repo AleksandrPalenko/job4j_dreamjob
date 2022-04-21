@@ -22,11 +22,11 @@ public class CandidateStore {
 
     private CandidateStore() {
         candidates.put(1, new Candidate(1, "Junior Java Job", "Collections, Stream API",
-                LocalDateTime.now()));
+                LocalDateTime.now(), null));
         candidates.put(2, new Candidate(2, "Middle Java Job","Spring, SQL",
-                LocalDateTime.now()));
+                LocalDateTime.now(), null));
         candidates.put(3, new Candidate(3, "Senior Java Job","Docker, Kafka",
-                LocalDateTime.now()));
+                LocalDateTime.now(), null));
     }
 
     /**
