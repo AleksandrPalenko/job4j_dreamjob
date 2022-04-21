@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.controller;
+package ru.job4j.dreamjob.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
