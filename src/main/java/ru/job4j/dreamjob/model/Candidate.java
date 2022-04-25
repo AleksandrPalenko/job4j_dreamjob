@@ -55,6 +55,14 @@ public class Candidate {
         return description;
     }
 
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
