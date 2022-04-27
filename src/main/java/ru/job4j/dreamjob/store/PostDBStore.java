@@ -57,11 +57,11 @@ public class PostDBStore {
                      "INSERT INTO post(name, description, created, visible, city_id) VALUES (?, ?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setInt(1, post.getId());
-            ps.setString(2, post.getName());
-            ps.setString(3, post.getDescription());
-            ps.setTimestamp(4, Timestamp.valueOf(post.getCreated()));
-            ps.setBoolean(5, post.isVisible());
+            ps.setString(1, post.getName());
+            ps.setString(2, post.getDescription());
+            ps.setTimestamp(3, Timestamp.valueOf(post.getCreated()));
+            ps.setBoolean(4, post.isVisible());
+            ps.setInt(5, post.getId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -77,14 +77,14 @@ public class PostDBStore {
     public void update(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE post SET name = ?, description = ?, created = ?, visible = ? city_id = ? where id = ?",
+                     "UPDATE post SET name = ?, description = ?, created = ?, visible = ? where id = ?",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setInt(1, post.getId());
-            ps.setString(2, post.getName());
-            ps.setString(3, post.getDescription());
-            ps.setTimestamp(4, Timestamp.valueOf(post.getCreated()));
-            ps.setBoolean(5, post.isVisible());
+            ps.setString(1, post.getName());
+            ps.setString(2, post.getDescription());
+            ps.setTimestamp(3, Timestamp.valueOf(post.getCreated()));
+            ps.setBoolean(4, post.isVisible());
+            ps.setInt(5, post.getId());
             ps.execute();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -112,5 +112,9 @@ public class PostDBStore {
             LOG.error(throwables.getMessage(), throwables);
         }
         return postId;
+    }
+
+    public List<Post> size() {
+        return findAll();
     }
 }

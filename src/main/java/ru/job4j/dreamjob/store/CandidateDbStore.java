@@ -13,7 +13,7 @@ public class CandidateDbStore {
 
     private final BasicDataSource pool;
 
-    private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(CandidateDbStore.class.getName());
 
     public CandidateDbStore(BasicDataSource pool) {
         this.pool = pool;
@@ -53,11 +53,10 @@ public class CandidateDbStore {
                      "INSERT INTO candidate(name, description, created, photo) VALUES (?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setInt(1, candidate.getId());
-            ps.setString(2, candidate.getName());
-            ps.setString(3, candidate.getDescription());
-            ps.setTimestamp(4, Timestamp.valueOf(candidate.getCreated()));
-            ps.setBytes(5, candidate.getPhoto());
+            ps.setString(1, candidate.getName());
+            ps.setString(2, candidate.getDescription());
+            ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
+            ps.setBytes(4, candidate.getPhoto());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -76,11 +75,11 @@ public class CandidateDbStore {
                      "UPDATE candidate SET name = ?, description = ?, created = ?, photo = ? where id = ?",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setInt(1, candidate.getId());
-            ps.setString(2, candidate.getName());
-            ps.setString(3, candidate.getDescription());
-            ps.setTimestamp(4, Timestamp.valueOf(candidate.getCreated()));
-            ps.setBytes(5, candidate.getPhoto());
+            ps.setString(1, candidate.getName());
+            ps.setString(2, candidate.getDescription());
+            ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
+            ps.setBytes(4, candidate.getPhoto());
+            ps.setInt(5, candidate.getId());
             ps.execute();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {

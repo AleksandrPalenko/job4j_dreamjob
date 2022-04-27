@@ -3,5 +3,5 @@ create TABLE candidate (
    name TEXT,
    description text,
    created timestamp,
-   photo bytea,
+   photo bytea
 );
