@@ -51,6 +51,15 @@ public class PostDBStore {
         return posts;
     }
 
+    public void deleteFrom() {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("TRUNCATE TABLE post RESTART IDENTITY")) {
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public Post add(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
@@ -77,21 +86,12 @@ public class PostDBStore {
     public void update(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE post SET name = ?, description = ?, created = ?, visible = ? where id = ?",
+                     "UPDATE post SET name = ? where id = ?",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, post.getName());
-            ps.setString(2, post.getDescription());
-            ps.setTimestamp(3, Timestamp.valueOf(post.getCreated()));
-            ps.setBoolean(4, post.isVisible());
-            ps.setInt(5, post.getId());
+            ps.setInt(2, post.getId());
             ps.execute();
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    post.setId(rs.getInt("1"));
-                    ps.execute();
-                }
-            }
         } catch (SQLException throwables) {
             LOG.error(throwables.getMessage(), throwables);
         }

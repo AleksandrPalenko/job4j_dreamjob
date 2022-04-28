@@ -69,6 +69,15 @@ public class CandidateDbStore {
         return candidate;
     }
 
+    public void deleteFrom() {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("TRUNCATE TABLE candidate RESTART IDENTITY")) {
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void update(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(

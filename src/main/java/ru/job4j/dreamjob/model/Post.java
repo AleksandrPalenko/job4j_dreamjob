@@ -93,8 +93,8 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id
+        return "Post{"
+                + "id=" + id
                 + ", name='" + name
                 + '\''
                 + '}';
