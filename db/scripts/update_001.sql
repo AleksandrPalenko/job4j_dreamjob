@@ -25,6 +25,7 @@ create TABLE if not exists city (
 CREATE TABLE if not exists users (
   id SERIAL PRIMARY KEY,
   name TEXT,
-  email TEXT,
-  password TEXT
+  email VARCHAR,
+  password TEXT,
+  CONSTRAINT email_unique UNIQUE (email)
 );

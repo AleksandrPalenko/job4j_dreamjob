@@ -1,7 +1,5 @@
 package ru.job4j.dreamjob.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Post;
 import net.jcip.annotations.ThreadSafe;
