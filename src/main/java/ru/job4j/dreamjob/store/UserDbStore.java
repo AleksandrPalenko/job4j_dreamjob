@@ -15,7 +15,7 @@ public class UserDbStore {
 
     private final BasicDataSource pool;
 
-    private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(UserDbStore.class.getName());
 
     public UserDbStore(BasicDataSource pool) {
         this.pool = pool;
