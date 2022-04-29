@@ -5,10 +5,10 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.model.User;
 
 import java.sql.*;
+import java.util.Optional;
 
 @Repository
 @ThreadSafe
@@ -22,7 +22,7 @@ public class UserDbStore {
         this.pool = pool;
     }
 
-    public User add(User user) {
+    public Optional<User> add(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "INSERT INTO post(name) VALUES (?)",
@@ -39,7 +39,7 @@ public class UserDbStore {
         } catch (SQLException throwables) {
             LOG.error(throwables.getMessage(), throwables);
         }
-        return user;
+        return Optional.of(user);
     }
 
     public User findByEmail(String email) {
