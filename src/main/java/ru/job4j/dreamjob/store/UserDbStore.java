@@ -23,6 +23,7 @@ public class UserDbStore {
     }
 
     public Optional<User> add(User user) {
+        Optional<User> result = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "INSERT INTO post(name) VALUES (?)",
@@ -36,10 +37,11 @@ public class UserDbStore {
                     user.setId(id.getInt(1));
                 }
             }
+            result = Optional.of(user);
         } catch (SQLException throwables) {
             LOG.error(throwables.getMessage(), throwables);
         }
-        return Optional.of(user);
+        return result;
     }
 
     public User findByEmail(String email) {
@@ -63,4 +65,5 @@ public class UserDbStore {
         }
         return userEmail;
     }
+
 }
