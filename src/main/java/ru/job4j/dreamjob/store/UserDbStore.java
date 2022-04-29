@@ -5,6 +5,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.model.User;
 
 import java.sql.*;
@@ -39,5 +40,27 @@ public class UserDbStore {
             LOG.error(throwables.getMessage(), throwables);
         }
         return user;
+    }
+
+    public User findByEmail(String email) {
+        User userEmail = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("select * from users where email = '?'")
+        ) {
+            ps.setString(1, email);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    userEmail = new User(
+                            it.getInt("id"),
+                            it.getString("name"),
+                            it.getString("password"),
+                            it.getString("email")
+                    );
+                }
+            }
+        } catch (SQLException throwables) {
+            LOG.error(throwables.getMessage(), throwables);
+        }
+        return userEmail;
     }
 }

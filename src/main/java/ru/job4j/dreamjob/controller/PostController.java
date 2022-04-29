@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.dreamjob.model.Post;
+import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @ThreadSafe
@@ -21,14 +24,16 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String posts(Model model) {
+    public String posts(Model model, HttpSession httpSession) {
         model.addAttribute("posts", postService.findAll());
+        model.addAttribute("posts", userShow(httpSession));
         return "posts";
     }
 
     @GetMapping("/formAddPost")
-    public String addPost(Model model) {
+    public String addPost(Model model, HttpSession httpSession) {
         model.addAttribute("cities", cityService.getAllCities());
+        model.addAttribute("posts", userShow(httpSession));
         return "addPost";
     }
 
@@ -52,4 +57,14 @@ public class PostController {
         model.addAttribute("cities", cityService.getAllCities());
         return "updatePost";
     }
+
+    public User userShow(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        return user;
+    }
+
 }
