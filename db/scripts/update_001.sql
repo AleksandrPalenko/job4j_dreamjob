@@ -1,3 +1,8 @@
+create TABLE if not exists city (
+   id SERIAL PRIMARY KEY,
+   name TEXT
+);
+
 create TABLE if not exists post (
    id SERIAL PRIMARY KEY,
    name TEXT,
@@ -15,11 +20,6 @@ create TABLE if not exists candidate (
    description text,
    created timestamp,
    photo bytea
-);
-
-create TABLE if not exists city (
-   id SERIAL PRIMARY KEY,
-   name TEXT
 );
 
 CREATE TABLE if not exists users (
