@@ -24,6 +24,12 @@ public class PostController {
     }
 
     @GetMapping("/posts")
+    public String posts(Model model) {
+        model.addAttribute("posts", postService.findAll());
+        return "posts";
+    }
+
+    @GetMapping("/posts")
     public String posts(Model model, HttpSession httpSession) {
         model.addAttribute("posts", postService.findAll());
         model.addAttribute("posts", userShow(httpSession));
@@ -38,6 +44,12 @@ public class PostController {
     }
 
     @PostMapping("/updatePost")
+    public String updatePost(@ModelAttribute Post post) {
+        postService.update(post);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/updatePost")
     public String updatePost(@ModelAttribute Post post, @RequestParam("city.id") int id) {
         post.setCity(cityService.findById(id));
         postService.update(post);
@@ -47,6 +59,12 @@ public class PostController {
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post, @RequestParam("city.id") int id) {
         post.setCity(cityService.findById(id));
+        postService.add(post);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/createPost")
+    public String createPost(@ModelAttribute Post post) {
         postService.add(post);
         return "redirect:/posts";
     }
